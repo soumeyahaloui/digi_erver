@@ -25,6 +25,12 @@ app.post('/create-room', async (req, res) => {
   }
 });
 
+// Handle GET requests to the /create-room endpoint
+app.get('/create-room', (req, res) => {
+  res.status(405).send('Method Not Allowed');
+});
+
+
 // Helper function to generate a random room code
 function generateRoomCode() {
   // Generate a random 6-character alphanumeric code
