@@ -29,7 +29,6 @@ app.get('/', (req, res) => {
     res.send('Hello, world!'); // Replace this with the desired response
 });
 
-
 // Endpoint to create a new room
 app.post('/create-room', async (req, res) => {
   try {
