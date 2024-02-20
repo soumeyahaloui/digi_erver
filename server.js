@@ -1,25 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-// Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Error connecting to MongoDB:', err));
-
-// Define room schema
-const roomSchema = new mongoose.Schema({
-  roomCode: String,
-  players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
-});
-
-const Room = mongoose.model('Room', roomSchema);
 
 // Middleware
 app.use(bodyParser.json());
