@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/your-database-name', {
+mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/?retryWrites=true&w=majority&appName=digigame', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
