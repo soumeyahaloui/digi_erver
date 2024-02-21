@@ -8,10 +8,21 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.json());
 
-// Define a default route handler
-app.get('/', (req, res) => {
-    res.send('Hello, world!'); // Replace this with the desired response
+// Connect to MongoDB Atlas
+mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Error connecting to MongoDB:', err));
+
+// Define room schema
+const roomSchema = new mongoose.Schema({
+  roomCode: String,
+  players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
 });
+
+const Room = mongoose.model('Room', roomSchema);
 
 // Endpoint to create a new room
 app.post('/create-room', async (req, res) => {
@@ -25,17 +36,16 @@ app.post('/create-room', async (req, res) => {
   }
 });
 
-// Handle GET requests to the /create-room endpoint
-app.get('/create-room', (req, res) => {
-  res.status(405).send('Method Not Allowed');
-});
-
-
 // Helper function to generate a random room code
 function generateRoomCode() {
   // Generate a random 6-character alphanumeric code
   return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
+
+// Handle GET requests to the /create-room endpoint
+app.get('/create-room', (req, res) => {
+  res.status(405).send('Method Not Allowed');
+});
 
 // Start the server
 app.listen(port, () => {
