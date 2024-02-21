@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/your-database-name', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -19,7 +19,7 @@ mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongo
 // Define room schema
 const roomSchema = new mongoose.Schema({
   roomCode: String,
-  players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
+  // players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }] // Remove this line if Player model is not defined
 });
 
 const Room = mongoose.model('Room', roomSchema);
