@@ -8,6 +8,11 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.json());
 
+// Define root route handler
+app.get('/', (req, res) => {
+  res.send('Welcome to DigiGame!');
+});
+
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/your-database-name', {
   useNewUrlParser: true,
