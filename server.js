@@ -41,10 +41,10 @@ app.post('/create-room', async (req, res) => {
   }
 });
 
-// Helper function to generate a random room code
+// Helper function to generate a random room code between 1111 and 9999
 function generateRoomCode() {
-  // Generate a random 6-character alphanumeric code
-  return Math.random().toString(36).substring(2, 8).toUpperCase();
+  // Generate a random number between 1111 and 9999
+  return Math.floor(Math.random() * (9999 - 1111 + 1)) + 1111;
 }
 
 // Handle GET requests to the /create-room endpoint
