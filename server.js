@@ -32,9 +32,9 @@ const Room = mongoose.model('Room', roomSchema);
 // Endpoint to create a new room
 app.post('/create-room', async (req, res) => {
   try {
-    const newRoom = new Room({ roomCode: generateRoomCode() });
-    await newRoom.save();
-    res.status(201).json({ roomCode: newRoom.roomCode });
+    const newRoom = new Room({ roomCode: generateRoomCode() }); // Creating a new room instance with a generated room code
+    await newRoom.save(); // Saving the new room to the database
+    res.status(201).json({ roomCode: newRoom.roomCode }); // Responding with the generated room code
   } catch (error) {
     console.error('Error creating room:', error);
     res.status(500).json({ error: 'Internal server error' });
