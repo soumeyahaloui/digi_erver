@@ -14,12 +14,13 @@ app.get('/', (req, res) => {
 });
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/?retryWrites=true&w=majority&appName=digigame', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+mongoose.connect('mongodb+srv://soumeyahaloui:yaKAREEM357@digigame.spba9yb.mongodb.net/mydatabase?retryWrites=true&w=majority', {
+  useNewUrlParser: true, // This option is deprecated but can be left for now
+  useUnifiedTopology: true // This option is deprecated but can be left for now
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Error connecting to MongoDB:', err));
+
 
 // Define room schema
 const roomSchema = new mongoose.Schema({
