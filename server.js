@@ -35,12 +35,33 @@ app.post('/create-room', async (req, res) => {
   try {
     const newRoom = new Room({ roomCode: generateRoomCode() }); // Creating a new room instance with a generated room code
     await newRoom.save(); // Saving the new room to the database
-    res.status(201).json({ roomCode: newRoom.roomCode }); // Responding with the generated room code
+    const roomNumber = newRoom.roomCode; // Retrieve the room number
+    console.log('New room created with room number:', roomNumber); // Log the room number
+    res.status(201).json({ roomCode: roomNumber }); // Responding with the generated room code
   } catch (error) {
     console.error('Error creating room:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// Endpoint to check if a room exists
+app.post('/check-room', async (req, res) => {
+  const { roomCode } = req.body;
+  try {
+    const room = await Room.findOne({ roomCode }); // Check if the room exists in the database
+    if (room) {
+      console.log('Room exists with room number:', roomCode); // Log the room number if it exists
+      res.status(200).json({ exists: true });
+    } else {
+      console.log('Room does not exist with room number:', roomCode); // Log if the room does not exist
+      res.status(404).json({ exists: false });
+    }
+  } catch (error) {
+    console.error('Error checking room:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Helper function to generate a random room code between 1111 and 9999
 function generateRoomCode() {
